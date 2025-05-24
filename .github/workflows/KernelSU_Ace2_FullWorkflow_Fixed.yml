@@ -226,40 +226,20 @@ jobs:
         }} ${{ github.event.inputs.BUILD_METHOD }}
 
         '
-    - name: Make AnyKernel3
-      run: 'git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
+      - name: Make AnyKernel3
+        run: |
+         git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
+         rm -rf ./AnyKernel3/.git
+         cp kernel_workspace/kernel_platform/out/msm-${{ github.event.inputs.CPUD }}-${{ github.event.inputs.CPUD }}-gki/dist/Image ./AnyKernel3/
 
-        rm -rf ./AnyKernel3/.git
-
-        cp kernel_workspace/kernel_platform/out/msm-${{ github.event.inputs.CPUD }}-${{
-        github.event.inputs.CPUD }}-gki/dist/Image ./AnyKernel3/
-
-        '
-    - name: Upload AnyKernel3
-      uses: actions/upload-artifact@v4
-      with:
-        name: AnyKernel3_KernelSU_Next_${{ env.KSUVER }}_${{ github.event.inputs.FEIL
-          }}
-        path: ./AnyKernel3/*
-    - name: Upload Image
-      uses: actions/upload-artifact@v4
-      with:
-        name: Image_KernelSU_Next_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
-        path: kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD
-          }}-gki/dist/Image
-    - name: Make AnyKernel3
-      run: "# 克隆官方 AnyKernel3 仓库\ngit clone https://github.com/Kernel-SU/AnyKernel3\
-        \ --depth=1\nrm -rf ./AnyKernel3/.git\n\n# 定义输出路径变量\nOUT_PATH=kernel_workspace/kernel_platform/out/msm-${{\
-        \ github.event.inputs.CPUD }}-${{ github.event.inputs.CPUD }}-gki/dist\n\n\
-        # 拷贝主内核文件（Image）\ncp $OUT_PATH/Image ./AnyKernel3/\n\n# 如有 Image.gz（建议压缩使用），优先使用\n\
-        if [ -f \"$OUT_PATH/Image.gz\" ]; then\n  cp $OUT_PATH/Image.gz ./AnyKernel3/\n\
-        else\n  gzip -c $OUT_PATH/Image > ./AnyKernel3/Image.gz\nfi\n\n# 可选: dtbo.img\n\
-        if [ -f \"$OUT_PATH/dtbo.img\" ]; then\n  cp $OUT_PATH/dtbo.img ./AnyKernel3/\n\
-        fi\n\n# 可选: vendor_boot.img（适用于 GKI 设备）\nif [ -f \"$OUT_PATH/vendor_boot.img\"\
-        \ ]; then\n  cp $OUT_PATH/vendor_boot.img ./AnyKernel3/\nfi\n\n# 可选: 复制模块或补充说明文件\n\
-        echo \"内核由 KernelSU Next 和 SUSFS 构建。\" > ./AnyKernel3/readme.txt"
-    - name: Upload AnyKernel3 Zip
-      uses: actions/upload-artifact@v3
-      with:
-        name: AnyKernel3-KernelSU-Ace2
-        path: AnyKernel3/*
+      - name: Upload AnyKernel3
+        uses: actions/upload-artifact@v4
+        with:
+         name: AnyKernel3_KernelSU_Next_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
+         path: ./AnyKernel3/*
+         
+      - name: Upload Image
+        uses: actions/upload-artifact@v4
+        with:
+         name: Image_KernelSU_Next_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
+         path: kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD }}-gki/dist/Image
