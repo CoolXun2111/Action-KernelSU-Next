@@ -1,5 +1,6 @@
 name: Build KernelSU for OnePlus Ace2
-workflow_dispatch:
+on:
+  workflow_dispatch:
     inputs:
       ANDROID_VERSION:
         default: android12
