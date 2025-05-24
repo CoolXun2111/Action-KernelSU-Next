@@ -1,5 +1,5 @@
 name: Build KernelSU for OnePlus Ace2
-true:
+on:
   workflow_dispatch:
     inputs:
       ANDROID_VERSION:
@@ -247,44 +247,3 @@ jobs:
         name: Image_KernelSU_Next_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
         path: kernel_workspace/kernel_platform/out/msm-kernel-${{ github.event.inputs.CPUD
           }}-gki/dist/Image
-'on':
-  workflow_dispatch:
-    inputs:
-      ANDROID_VERSION:
-        default: android12
-        description: 内核安卓版本
-        required: true
-      BUILD_METHOD:
-        default: gki
-        description: 编译方式
-        required: true
-      CPU:
-        default: sm8475
-        description: 分支
-        required: true
-      CPUD:
-        default: waipio
-        description: 处理器代号
-        required: true
-      FEIL:
-        default: oneplus_ace2_v
-        description: 配置文件
-        required: true
-      KERNEL_VERSION:
-        default: '5.10'
-        description: 内核版本
-        required: true
-      KSUNEXT_ENABLED:
-        default: true
-        description: 添加 KSU Next
-        required: true
-        type: boolean
-      SUSFS_ENABLED:
-        default: true
-        description: 添加 SUSFS
-        required: true
-        type: boolean
-      SUSFS_VERSION:
-        default: v1.5.7
-        description: SUSFS 版本
-        required: true
