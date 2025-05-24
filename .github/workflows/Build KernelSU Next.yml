@@ -142,7 +142,7 @@ jobs:
            cd ./KernelSU-Next
            patch -p1 < --forward < 0001_susfs_157_for_ksunext.patch || true
            cd ../common
-           if [ "${{ github.event.inputs.KERNEL_VERSION }}" == "6.1" ]; then
+           if [ "${{ github.event.inputs.KERNEL_VERSION }}" == "5.10" ]; then
              patch -p1 < 001-lz4.patch || true
              patch -p1 < 002-zstd.patch || true
            fi
@@ -180,7 +180,7 @@ jobs:
           sed -i '$s|echo "\$res"|echo "-Xun"|' kernel_platform/common/scripts/setlocalversion            
           sed -i '$s|echo "\$res"|echo "-Xun"|' kernel_platform/msm-kernel/scripts/setlocalversion
           sed -i '$s|echo "\$res"|echo "-Xun"|' kernel_platform/external/dtc/scripts/setlocalversion
-          if [ "${{ github.event.inputs.KERNEL_VERSION }}" == "6.1" ]; then
+          if [ "${{ github.event.inputs.KERNEL_VERSION }}" == "5.10" ]; then
             LTO=thin ./kernel_platform/build_with_bazel.py -t ${{ github.event.inputs.CPUD }} gki
           else
             LTO=thin ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
@@ -226,7 +226,7 @@ jobs:
           fi
 
       - name: Upload AnyKernel3 lz4 & zstd
-        if: ${{ github.event.inputs.KERNEL_VERSION == '6.1' }}
+        if: ${{ github.event.inputs.KERNEL_VERSION == '5.10' }}
         uses: actions/upload-artifact@v4
         with:
          name: AnyKernel3_KernelSU_Next_lz4_zstd_${{ env.KSUVER }}_${{ github.event.inputs.FEIL }}
