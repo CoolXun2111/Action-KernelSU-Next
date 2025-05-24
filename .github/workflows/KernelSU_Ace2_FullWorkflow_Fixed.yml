@@ -263,10 +263,3 @@ jobs:
       with:
         name: AnyKernel3-KernelSU-Ace2
         path: AnyKernel3/*
-'on':
-  workflow_dispatch:
-    inputs:
-      CPUD:
-        default: lahaina
-        description: 'CPU 架构 (如: kona, lahaina)'
-        required: true
