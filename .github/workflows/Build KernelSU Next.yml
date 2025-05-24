@@ -153,7 +153,7 @@ jobs:
            
       - name: Apply new hook & Add configuration
         run: |
-            cd kernel_workspace/kernel_platform
+         cd kernel_workspace/kernel_platform
          echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
          echo "CONFIG_KSU_WITH_KPROBES=n" >> ./common/arch/arm64/configs/gki_defconfig
          echo "CONFIG_KSU_SUSFS=y" >> ./common/arch/arm64/configs/gki_defconfig
