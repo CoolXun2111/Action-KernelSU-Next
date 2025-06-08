@@ -123,8 +123,6 @@ jobs:
           patch -p1 --forward < 10_enable_susfs_for_ksu.patch || echo "Patch applied with conflicts, continuing..."
           cp ../../kernel_patches/mksu/mksu_susfs.patch ./
           patch -p1 < mksu_susfs.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
-          cp ../../kernel_patches/next/syscall_hooks.patch ./
-          patch -p1 -F 3 < syscall_hooks.patch || echo "Patch applied with conflicts, continuing..."
           cp ../../kernel_patches/mksu/fix.patch ./
           patch -p1 < fix.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
           cp ../../kernel_patches/69_hide_stuff.patch ./
