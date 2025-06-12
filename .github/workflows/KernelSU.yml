@@ -118,15 +118,15 @@ jobs:
           cp -r ../susfs4ksu/kernel_patches/fs/* ./common/fs/
           cp -r ../susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
           cd common
-          patch -s -p1 < 50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch || echo "Patch applied with conflicts, continuing..."
+          patch -p1 < 50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch || echo "Patch applied with conflicts, continuing..."
           cd ../KernelSU
-          patch -p1 --forward < 10_enable_susfs_for_ksu.patch
+          patch -p1 < 10_enable_susfs_for_ksu.patch
           cp ../../kernel_patches/mksu/mksu_susfs.patch ./
-          patch -p1 --forward < mksu_susfs.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
+          patch -p1 < mksu_susfs.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
           cp ../../kernel_patches/mksu/fix.patch ./
-          patch -p1 --forward < fix.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
+          patch -p1 < fix.patch || echo "Patch conflicts detected, continuing with unresolved changes..."
           cp ../kernel_patches4mksu/mksu/vfs_fix.patch ./
-          patch -p1 --forward < vfs_fix.patch
+          patch -p1 < vfs_fix.patch
           cd ..
 
       - name: Apply new hook and add configuration
