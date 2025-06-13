@@ -117,16 +117,16 @@ jobs:
 
            # Apply patches
            cd ./KernelSU-Next
-           cp ../kernel_patches/next/ksun_susfs_v1.5.7_patch_12647+.patch ./
+           cp ../../kernel_patches/next/ksun_susfs_v1.5.7_patch_12647+.patch ./
            patch -p1 --forward --verbose < ksun_susfs_v1.5.7_patch_12647+.patch || true
-           cp ../kernel_patches/next/manager.patch ./
+           cp ../../kernel_patches/next/manager.patch ./
            patch -p1 --fuzz=3 --verbose < manager.patch || true
            cd ../common
            patch -p1 --verbose < 50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch || true
-           cp ../kernel_patches/69_hide_stuff.patch ./
+           cp ../../kernel_patches/69_hide_stuff.patch ./
            patch -p1 --fuzz=3 --verbose < 69_hide_stuff.patch || true
            #patch -p1 -F 3 < syscall_hooks.patch
-           cp ../kernel_patches/next/scope_min_manual_hooks_v1.4.patch ./
+           cp ../../kernel_patches/next/scope_min_manual_hooks_v1.4.patch ./
            patch -p1 --fuzz=3 --verbose < ./scope_min_manual_hooks_v1.4.patch
       - name: Apply new hook and add configuration
         run: |
